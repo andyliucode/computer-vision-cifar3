@@ -22,6 +22,8 @@ x_test = np.reshape(x_test, (x_test.shape[0], 3, 32, 32))
 x_test = np.swapaxes(x_test, 1, 2)
 x_test = np.swapaxes(x_test, 2, 3)
 
+# print(x_test.shape)
+
 # Train the model
 print("Start training...")
 start_time = time.time()
@@ -30,10 +32,10 @@ SVM_model = svm.SVC()
 SVM_model.fit(X, y)
 
 print("Training done!")
-print("--- %s seconds elapsed ---" % (time.time() - start_time())
+print("--- %s seconds elapsed ---" % (time.time() - start_time()))
 
 # Save the model
-model_path = "trained_svm_model.pkl"
+model_path = "saved_svm_model.pkl"
 pickle.dump(SVM_model, open(model_path, 'wb'))
 print("Model saved!")
 
