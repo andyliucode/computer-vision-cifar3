@@ -32,7 +32,7 @@ SVM_model = svm.SVC()
 SVM_model.fit(X, y)
 
 print("Training done!")
-print("--- %s seconds elapsed ---" % (time.time() - start_time()))
+print("--- %s seconds elapsed ---" % (time.time() - start_time))
 
 # Save the model
 model_path = "saved_svm_model.pkl"
