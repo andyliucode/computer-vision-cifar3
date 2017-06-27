@@ -4,6 +4,7 @@ import numpy as np
 import scipy.io
 from sklearn import svm
 import sklearn.model_selection
+import pickle
 
 # Load the training data
 training_data_path = '../handouts/data_mat/data_batch'
@@ -24,8 +25,12 @@ x_test = np.swapaxes(x_test, 2, 3)
 SVM_model = svm.SVC()
 SVM_model.fit(X, y)
 
+# Save the model
+model_path = "trained_svm_model.pkl"
+pickle.dump(SVM_model, open(model_path, 'wb'))
+
 # Generate predictions
-predictions = SVM_model.predict_classes(x_test)
+predictions = SVM_model.predict(x_test)
 
 # Save predictions to csv
 np.savetxt("SVM_results.csv", predictions, delimiter=",")
