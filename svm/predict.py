@@ -21,10 +21,10 @@ data = scipy.io.loadmat(test_data_path)
 
 # Process the test data
 x_test = data['data']
-x_test = np.reshape(x_test, (x_test.shape[0], 3, 32, 32))
-x_test = np.swapaxes(x_test, 1, 2)
-x_test = np.swapaxes(x_test, 2, 3)
-x_test = np.reshape(x_test, (x_test.shape[0], 3072))
+# x_test = np.reshape(x_test, (x_test.shape[0], 3, 32, 32))
+# x_test = np.swapaxes(x_test, 1, 2)
+# x_test = np.swapaxes(x_test, 2, 3)
+# x_test = np.reshape(x_test, (x_test.shape[0], 3072))
 
 print(x_test.shape)
 
@@ -33,7 +33,9 @@ model_path = 'saved_svm_model.pkl'
 SVM_model = pickle.load(open(model_path, 'rb'))
 
 # Generate predictions
+start_time = time.time()
 predictions = SVM_model.predict(x_test)
+print('--- %s seconds elapsed ---' % (time.time() - start_time))
 
 # Save predictions to csv
-np.savetxt('SVM_results.csv', predictions, delimiter=',')
+np.savetxt('SVM_results2.csv', predictions, delimiter=',')
