@@ -138,7 +138,7 @@ def main(unused_argv):
 
   # Set up logging for predictions
   # Log the values in the "Softmax" tensor with label "probabilities"
-  tensors_to_log = {"probabilities": "softmax_tensor"}
+  # tensors_to_log = {"probabilities": "softmax_tensor"}
   logging_hook = tf.train.LoggingTensorHook(
       tensors=tensors_to_log, every_n_iter=50)
 
@@ -147,8 +147,11 @@ def main(unused_argv):
       x=train_data,
       y=train_labels,
       batch_size=100,
-      steps=20000,
+      steps=20,
       monitors=[logging_hook])
+
+  print('done training')
+  print('time taken: %s' % (time.time() - start_time))
 
   # Configure the accuracy metric for evaluation
   metrics = {
@@ -156,6 +159,8 @@ def main(unused_argv):
           learn.MetricSpec(
               metric_fn=tf.metrics.accuracy, prediction_key="classes"),
   }
+  
+  print('start getting eval results')
 
   # Evaluate the model and print results
   eval_results = mnist_classifier.evaluate(
