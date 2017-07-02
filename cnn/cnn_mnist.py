@@ -23,8 +23,9 @@ import tensorflow as tf
 from tensorflow.contrib import learn
 from tensorflow.contrib.learn.python.learn.estimators import model_fn as model_fn_lib
 
-tf.logging.set_verbosity(tf.logging.INFO)
+import time
 
+tf.logging.set_verbosity(tf.logging.INFO)
 
 def cnn_model_fn(features, labels, mode):
   """Model function for CNN."""
@@ -120,6 +121,9 @@ def cnn_model_fn(features, labels, mode):
 
 
 def main(unused_argv):
+  start_time = time.time()
+  print('time taken: %s' % (time.time() - start_time))
+  
   # Load training and eval data
   mnist = learn.datasets.load_dataset("mnist")
   train_data = mnist.train.images  # Returns np.array
@@ -156,6 +160,8 @@ def main(unused_argv):
   eval_results = mnist_classifier.evaluate(
       x=eval_data, y=eval_labels, metrics=metrics)
   print(eval_results)
+  
+  print('time taken: %s' % (time.time() - start_time))
 
 
 if __name__ == "__main__":
