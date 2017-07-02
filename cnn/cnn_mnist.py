@@ -25,7 +25,8 @@ from tensorflow.contrib.learn.python.learn.estimators import model_fn as model_f
 
 import time
 
-tf.logging.set_verbosity(tf.logging.INFO)
+# tf.logging.set_verbosity(tf.logging.INFO)
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 def cnn_model_fn(features, labels, mode):
   """Model function for CNN."""
